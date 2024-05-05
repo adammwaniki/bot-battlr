@@ -14,6 +14,28 @@ const botTypeClasses = {
 };
 
 function BotCard({ bot, onSelect, onRemove  }) {
+// sending a DELETE request when someone clicks on the x button
+const handleDeleteBot = (botId) => {
+  // Send a delete request to remove the bot
+  fetch(`http://localhost:8002/bots/${botId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        // If the request is successful, call the onRemoveBot function
+        onRemove(botId);
+      } else {
+        throw new Error("Failed to remove bot");
+      }
+    })
+    .catch((error) => {
+      console.error("Error removing bot:", error);
+    });
+};
+
   return (
     <div className="ui column">
       <div
@@ -51,7 +73,7 @@ function BotCard({ bot, onSelect, onRemove  }) {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() => onRemove(bot.id)}
+                onClick={() => handleDeleteBot(bot.id)} //calling the handledelete function
               >
                 x
               </button>

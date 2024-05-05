@@ -11,7 +11,7 @@ import BotSpecs from "./BotSpecs";
 * Step 3. We now pass the bots as props to the BotCollection component so that it can be rendered there
 * We now add some more state variables to help us handle what happens when we click on the buttons
 * Step 4. We add some state variables to handle selecting the bot, enlisting the bot and showing the bot specs
-* Step 5. We now add the event handler functions that will handle these actions so that we can pass them in to be rendered by just calling their names instead of the full function
+* Step 5. We now add the event handler functions that we can pass as props to the other components
 
 */
 
@@ -44,16 +44,20 @@ const handleBotSelect = (bot) => {
 
 // Function to handle enlisting a bot
 const handleEnlistBot = () => {
-  // Add the selected bot to YourBotArmy
-  // First confirming that the bot has bot been selected before so that it can be added to the army
-  if (!yourBotArmy.some(bot => bot.id === selectedBot.id)) {
-    setYourBotArmy([...yourBotArmy, selectedBot]);
-  }
+   if (selectedBot) { // We start by checking to see if a bot has been selected
+    // Add the selected bot to YourBotArmy
+    // First confirming that the bot has bot been selected before so that it can be added to the army
+    // Here we can implement the some() method
+    // Notes on the some() method:
+    // The some() method tests whether at least one element in the array passes the test implemented by the provided function. It returns a Boolean value. if false it doesn't modify the array
+    if (!yourBotArmy.some(bot => bot.id === selectedBot.id)) {
+      setYourBotArmy([...yourBotArmy, selectedBot]);
+    }
 
   // Clear the selected bot and hide the BotSpecs
   setSelectedBot(null);
   setShowBotSpecs(false);
-  
+   }
 };
 // Function to handle go back
 const handleGoBack = () => {
