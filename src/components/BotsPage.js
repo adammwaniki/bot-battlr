@@ -11,7 +11,7 @@ import BotSpecs from "./BotSpecs";
 * Step 3. We now pass the bots as props to the BotCollection component so that it can be rendered there
 * We now add some more state variables to help us handle what happens when we click on the buttons
 * Step 4. We add some state variables to handle selecting the bot, enlisting the bot and showing the bot specs
-* Step 5. We now add the functions that will handle these actions
+* Step 5. We now add the functions that will handle these actions so that we can pass them in to be rendered by just calling their names instead of the full function
 
 */
 
@@ -57,7 +57,11 @@ const handleEnlist = () => {
   setShowBotSpecs(false);
   }
 };
-
+// Function to handle go back
+const handleGoBack = () => {
+  setSelectedBot(null);
+  setShowBotSpecs(false);
+};
 
   // Step 3
   // Passing the bots as props to the BotCollection component
@@ -65,7 +69,7 @@ const handleEnlist = () => {
   return (
     <div>
       {showBotSpecs ? (
-        <BotSpecs bot={selectedBot} onGoBack={() => setShowBotSpecs(false)} onEnlist={handleEnlist} />
+        <BotSpecs bot={selectedBot} onGoBack={handleGoBack} onEnlist={handleEnlist} />
       ) : (
       <div>
         <YourBotArmy bots={yourBotArmy} />

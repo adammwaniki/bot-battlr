@@ -58,7 +58,7 @@ function BotSpecs({ bot, onGoBack, onEnlist }) {
             </button>
             <button
               className="ui button fluid"
-              onClick={() => onEnlist(bot)}
+              onClick={ onEnlist}
             >
               Enlist
             </button>
