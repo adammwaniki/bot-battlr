@@ -1,5 +1,9 @@
 import React from "react";
 
+// Algorithm
+// In this component we only need an event listener for when someone clicks on the card of a particular bot
+// When it is clicked on, it will render the BotSpecs component for that particular bot
+
 const botTypeClasses = {
   Assault: "icon military",
   Defender: "icon shield",
@@ -9,13 +13,13 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot }) {
+function BotCard({ bot, onSelect, onRemove  }) {
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={() => onSelect(bot)}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
@@ -48,7 +52,7 @@ function BotCard({ bot }) {
               <button
                 className="ui mini red button"
                 onClick={() =>
-                  console.log("add code to connect event listener")
+                  onRemove(bot.id)
                 }
               >
                 x
