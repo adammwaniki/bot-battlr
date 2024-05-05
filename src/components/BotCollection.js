@@ -1,11 +1,22 @@
 import React from "react";
+import BotCard from "./BotCard";
 
-function BotCollection() {
+// Algorithm
+/*
+* Step 1. Start by passing in bots as props
+* Step 2. Use the map method to iterate over the list of bot items we received from the json data
+* Step 3. These bot items will be passed as props into the BotCard component using the bot id as the key
+*/
+
+function BotCollection({bots}) { // Step 1
   // Your code here
+  // Step 2 and Step 3 will be handled here
   return (
     <div className="ui four column grid">
       <div className="row">
-        {/*...and here..*/}
+        {bots.map((bot) => (
+          <BotCard key={bot.id} bot={bot} />
+        ))}
         Collection of all bots
       </div>
     </div>
