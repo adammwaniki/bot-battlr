@@ -51,7 +51,7 @@ function BotCard({ bot, onSelect, onRemove  }) {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={onRemove}
+                onClick={() => onRemove(bot.id)}
               >
                 x
               </button>

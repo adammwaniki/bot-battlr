@@ -11,7 +11,7 @@ import BotSpecs from "./BotSpecs";
 * Step 3. We now pass the bots as props to the BotCollection component so that it can be rendered there
 * We now add some more state variables to help us handle what happens when we click on the buttons
 * Step 4. We add some state variables to handle selecting the bot, enlisting the bot and showing the bot specs
-* Step 5. We now add the functions that will handle these actions so that we can pass them in to be rendered by just calling their names instead of the full function
+* Step 5. We now add the event handler functions that will handle these actions so that we can pass them in to be rendered by just calling their names instead of the full function
 
 */
 
@@ -43,25 +43,29 @@ const handleBotSelect = (bot) => {
 };
 
 // Function to handle enlisting a bot
-const handleEnlist = () => {
-  // Remove the selected bot from the BotCollection
-  //const updatedBots = bots.filter((bot) => bot.id !== selectedBot.id);
-  //setBots(updatedBots);
-  if (selectedBot) {
-
+const handleEnlistBot = () => {
   // Add the selected bot to YourBotArmy
-  setYourBotArmy([...yourBotArmy, selectedBot]);
+  // First confirming that the bot has bot been selected before so that it can be added to the army
+  if (!yourBotArmy.some(bot => bot.id === selectedBot.id)) {
+    setYourBotArmy([...yourBotArmy, selectedBot]);
+  }
 
   // Clear the selected bot and hide the BotSpecs
   setSelectedBot(null);
   setShowBotSpecs(false);
-  }
+  
 };
 // Function to handle go back
 const handleGoBack = () => {
   setSelectedBot(null);
   setShowBotSpecs(false);
 };
+// Function to remove bot from the army
+const handleRemoveBot = (botId) => {
+  const updatedBots = yourBotArmy.filter(bot => bot.id !== botId);
+  setYourBotArmy(updatedBots);
+};
+
 
   // Step 3
   // Passing the bots as props to the BotCollection component
@@ -69,10 +73,10 @@ const handleGoBack = () => {
   return (
     <div>
       {showBotSpecs ? (
-        <BotSpecs bot={selectedBot} onGoBack={handleGoBack} onEnlist={handleEnlist} />
+        <BotSpecs bot={selectedBot} onGoBack={handleGoBack} onEnlist={handleEnlistBot} />
       ) : (
       <div>
-        <YourBotArmy bots={yourBotArmy} />
+        <YourBotArmy bots={yourBotArmy} onRemoveBot={handleRemoveBot} />
         <BotCollection bots={bots} onSelectBot={handleBotSelect} />
       </div>
     )}
