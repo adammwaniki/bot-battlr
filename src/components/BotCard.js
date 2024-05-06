@@ -13,7 +13,7 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot, onSelect, onRemove  }) {
+function BotCard({ bot, onSelect, onRemove, isRendered }) {
 // sending a DELETE request when someone clicks on the x button
 const handleDeleteBot = (botId) => {
   // Send a delete request to remove the bot
@@ -41,7 +41,7 @@ const handleDeleteBot = (botId) => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => onSelect(bot)}
+        onClick={() => (isRendered ? onRemove(bot.id) : onSelect(bot))}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
