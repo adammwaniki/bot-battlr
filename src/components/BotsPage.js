@@ -76,13 +76,11 @@ const handleRemoveBot = (botId) => {
 
   return (
     <div>
+      <YourBotArmy bots={yourBotArmy} onRemoveBot={handleRemoveBot} />
       {showBotSpecs ? (
         <BotSpecs bot={selectedBot} onGoBack={handleGoBack} onEnlist={handleEnlistBot} />
       ) : (
-      <div>
-        <YourBotArmy bots={yourBotArmy} onRemoveBot={handleRemoveBot} />
         <BotCollection bots={bots} onSelectBot={handleBotSelect} />
-      </div>
     )}
     </div>
       
