@@ -54,7 +54,7 @@ const handleEnlistBot = () => {
       setYourBotArmy([...yourBotArmy, selectedBot]);
     }
 
-  // Clear the selected bot and hide the BotSpecs
+  // Clearing the selected bot and hide the BotSpecs once we select a bot so that it shows the botcollection
   setSelectedBot(null);
   setShowBotSpecs(false);
    }
